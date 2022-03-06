@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="Lab - Configure Router-on-a-Stick Inter-VLAN Routing" version="1" scripttimeout="300" lock="0" author="Skezzio">
+  <description>В этой лабораторной работе вы настроите магистральные каналы между этими коммутаторами.</description>
+  <body>1. Создание сети и настройка основных параметров устройства
+2. Создание VLAN и назначение портов коммутатора
+3. Настройка магистрали 802.1Q между коммутаторами
+4. Настройка маршрутизации между VLAN на маршрутизаторе
+5. Проверка работы маршрутизации между VLAN</body>
+  <topology>
+    <nodes>
+      <node id="1" name="R1" type="iol" template="iol" image="L3-ADVENTERPRISEK9-M-15.4-2T.bin" ethernet="1" nvram="1024" ram="1024" serial="0" console="" delay="0" icon="Router.png" config="0" left="264" top="36">
+        <interface id="0" name="e0/0" type="ethernet" network_id="1"/>
+      </node>
+      <node id="2" name="SW1" type="iol" template="iol" image="L2-ADVENTERPRISEK9-M-15.2-20150703.bin" ethernet="1" nvram="1024" ram="1024" serial="0" console="" delay="0" icon="Switch.png" config="0" left="423" top="39">
+        <interface id="16" name="e0/1" type="ethernet" network_id="3"/>
+        <interface id="32" name="e0/2" type="ethernet" network_id="1"/>
+        <interface id="48" name="e0/3" type="ethernet" network_id="2"/>
+      </node>
+      <node id="3" name="SW2" type="iol" template="iol" image="L2-ADVENTERPRISEK9-M-15.2-20150703.bin" ethernet="1" nvram="1024" ram="1024" serial="0" console="" delay="0" icon="Switch.png" config="0" left="603" top="39">
+        <interface id="32" name="e0/2" type="ethernet" network_id="4"/>
+        <interface id="48" name="e0/3" type="ethernet" network_id="2"/>
+      </node>
+      <node id="4" name="PC1" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="432" top="201">
+        <interface id="0" name="eth0" type="ethernet" network_id="3"/>
+      </node>
+      <node id="5" name="PC2" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="612" top="201">
+        <interface id="0" name="eth0" type="ethernet" network_id="4"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="bridge" name="Net-R1iface_0" left="324" top="76" visibility="0"/>
+      <network id="2" type="bridge" name="Net-SW1iface_48" left="483" top="79" visibility="0"/>
+      <network id="3" type="bridge" name="Net-SW1iface_16" left="483" top="79" visibility="0"/>
+      <network id="4" type="bridge" name="Net-SW2iface_32" left="663" top="79" visibility="0"/>
+    </networks>
+  </topology>
+</lab>
