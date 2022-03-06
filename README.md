@@ -97,7 +97,7 @@ S1(config)#int vlan 3
 S1(config-if)#ip address 192.168.3.11 255.255.255.0  
 S1(config-if)#no sh  
 S1(config-if)#do sh vl brief  
-![1](https://user-images.githubusercontent.com/99095235/156938577-e535e11e-bf89-417e-86e8-0f3507137bd0.png)
+![1](https://user-images.githubusercontent.com/99095235/156938577-e535e11e-bf89-417e-86e8-0f3507137bd0.png)  
 S1(config-if)#do wr mem
 
 Настройка VLAN S2:
@@ -134,7 +134,7 @@ S2(config-if)#ip add
 S2(config-if)#ip address 192.168.3.12 255.255.255.0  
 S2(config-if)#no sh  
 S2(config-if)#do sh vl br  
-![2](https://user-images.githubusercontent.com/99095235/156938695-43f391bf-c4ad-4a0b-9409-a312ba3887b1.png)
+![2](https://user-images.githubusercontent.com/99095235/156938695-43f391bf-c4ad-4a0b-9409-a312ba3887b1.png)  
 S2(config-if)#do wr mem  
 
 Конфигурация R1:
