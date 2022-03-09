@@ -1,17 +1,17 @@
 # Configure Router-on-a-Stick Inter-VLAN Routing
-# map
+map
 
 ![map](https://user-images.githubusercontent.com/99095235/156936532-dd59f9a1-2b8c-47b7-bf88-fe912ce69def.png)
 
-# ip address table
+ip address table
 
 ![ATable](https://user-images.githubusercontent.com/99095235/156936538-32eca4d2-b844-4612-9dac-5c1bbe7e717a.png)
 
-# vlan table
+vlan table
 
 ![TVlan](https://user-images.githubusercontent.com/99095235/156936556-0043a2b5-fec4-42c9-8e93-a87461f15696.png)
 
-# task  
+task  
 ```
 1. Создание сети и настройка основных параметров устройства
 2. Создание VLAN и назначение портов коммутатора
