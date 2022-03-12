@@ -176,7 +176,8 @@ R1(config)#int e0/0.4
 R1(config-subif)#encapsulation dot1Q 4  
 R1(config-subif)#ip address 192.168.4.1 255.255.255.0  
 R1(config-subif)#ex  
-R1(config)#int e0/0.8  
+R1(config)#int e0/0.8 
+R1(config-subif)#encapsulation dot1Q 8  
 R1(config-subif)#ex  
 R1(config)#int e0/0  
 R1(config-if)#no sh  
