@@ -1,24 +1,24 @@
-Lab - Implement DHCPv4
-Топология:
+# Lab - Implement DHCPv4
+### Топология:
 
 ![image](https://user-images.githubusercontent.com/99095235/159233203-911522cc-a970-446a-8ba7-f148d019d793.png)
 
-Таблица адресации:
+### Таблица адресации:
 
 ![image](https://user-images.githubusercontent.com/99095235/159233284-829b3428-a17a-4fe7-9250-75e5c72d24b1.png)
 
-Таблица VLAN:
+### Таблица VLAN:
 
 ![image](https://user-images.githubusercontent.com/99095235/159233488-7e19f531-74ac-4079-85d2-f6108275675a.png)
 
 
-Цели:
+#### Цели:
 1. Создание сети и настройка основных параметров устройства
 2. Настройка и проверка двух серверов DHCPv4 на маршрутизаторе R1
 3. Настройка и проверка ретрансляции DHCP на маршрутизаторе R2
 ___________________________________________________________________
 
-Настройка основных параметров для каждого маршрутизатора.
+#### Настройка основных параметров для R1/R2
 
 R1:
 ```
@@ -62,7 +62,7 @@ R2(config)#exit
 R2#clock set 10:24:00 21 MARCH 2022
 R2#wr mem
 ```
-Настройка маршрутизацию между VLAN на маршрутизаторе R1
+#### Настройка маршрутизации между VLAN на R1
 ```
 R1(config)#int e0/1
 R1(config-if)#no sh
@@ -84,7 +84,6 @@ R1(config)#int e0/1.1000
 R1(config-subif)#encapsulation dot1Q 1000
 R1(config-subif)#description Native
 R1(config-subif)#exit
-
 R1(config)#do sh ip int br
 Interface                  IP-Address      OK? Method Status                Protocol
 Ethernet0/0                unassigned      YES unset  administratively down down
@@ -95,7 +94,7 @@ Ethernet0/1.1000           unassigned      YES unset  up                    up
 Ethernet0/2                unassigned      YES unset  administratively down down
 Ethernet0/3                unassigned      YES unset  administratively down down
 ```
-Настройка e0/0-1 на R2, и настройка статической маршрутизации для обоих маршрутизаторов.
+#### Настройка e0/0-1 на R2, и настройка статической маршрутизации для обоих маршрутизаторов.
 
 R2:
 ```
@@ -122,7 +121,7 @@ Sending 5, 100-byte ICMP Echos to 192.168.3.1, timeout is 2 seconds:
 Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
 R1#wr mem
 ```
-Настройка основных параметров для каждого коммутатора.
+#### Настройка основных параметров для каждого коммутатора.
 
 S1:
 ```
@@ -166,7 +165,8 @@ S2(config)#exit
 S2#clock set 10:53:00 21 MARCH 2022
 S2#wr mem
 ```
-Создание VLAN на S1/S2.
+#### Создание VLAN на S1/S2.
+
 S1:
 ```
 S1#conf t
@@ -208,7 +208,7 @@ S2(config-if)#switchport access vlan 1
 S2(config-if)#exit
 ```
 
-настройка S1 e0/0 trunk 802.1Q.
+#### Настройка e0/0-1 на S1.
 ```
 S1(config)#int e0/0
 S1(config-if)#switchport mode access
@@ -221,7 +221,7 @@ S1(config-if)#switchport trunk native vlan 1000
 S1(config-if)#switchport trunk allowed vlan 100,200,1000
 S1(config-if)#do wr mem
 ```
-Настройте и проверьте два сервера DHCPv4 на маршрутизаторе R1
+#### Настройка двух серверов DHCPv4 на R1
 ```
 R1(config)#ip dhcp excluded-address 192.168.1.1 192.168.1.5
 R1(config)#ip dhcp excluded-address 192.168.3.1 192.168.3.5
@@ -239,7 +239,7 @@ R1(dhcp-config)#default-router 192.168.3.1
 R1(dhcp-config)#exit
 R1(config)#wr mem
 ```
-Step 4: Попытка получить IP-адрес от DHCP на ПК-A
+Попытка получить IP-адрес от DHCP на ПК-A
 ```
 VPCS> dhcp
 IP 192.168.1.6/24 GW 192.168.1.1
@@ -266,13 +266,13 @@ VPCS> ping 192.168.1.1
 84 bytes from 192.168.1.1 icmp_seq=5 ttl=255 time=0.635 ms
 
 ```
-Part 3: Настройте и проверьте DHCP-ретранслятор на маршрутизаторе R2.
+#### Настройка DHCP-helper-address на R2.
 ```
 R2(config-if)#ip helper-address 10.0.0.1
 R2(config-if)#exit
 R2(config)#wr mem
 ```
-Step 2: Попытка получить IP-адрес от DHCP на ПК-B
+Попытка получить IP-адрес от DHCP на ПК-B
 ```
 VPCS> dhcp
 IP 192.168.3.6/24 GW 192.168.3.1
